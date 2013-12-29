@@ -1,0 +1,289 @@
+@bgcolor: #2db573;
+@bgcolor-shadow: #29a368;
+@grey-light: #34495e;
+@grey-heavy: #223440;
+
+body{
+  background-color: @bgcolor;
+}
+
+/* mixin common style */
+.absolute-center{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0; 
+  margin: auto;
+}
+
+.radius(@radius: 4px){
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  -msie-border-radius: @radius;
+  -o-border-radius: @radius;
+  border-radius: @radius;
+}
+
+.radius-top-left(@x: 30px, @y: 50px){
+  -webkit-border-top-left-radius: @x @y;
+  -moz-border-top-left-radius: @x @y;
+  -msie-border-top-left-radius: @x @y;
+  -o-border-top-left-radius: @x @y;
+  border-top-left-radius: @x @y;
+}
+
+.radius-top-right(@x: 30px, @y: 50px){
+  -webkit-border-top-right-radius: @x @y;
+  -moz-border-top-right-radius: @x @y;
+  -msie-border-top-right-radius: @x @y;
+  -o-border-top-right-radius: @x @y;
+  border-top-right-radius: @x @y;
+}
+
+.radius-bottom-left(@x: 30px, @y: 50px){
+  -webkit-border-bottom-left-radius: @x @y;
+  -moz-border-bottom-left-radius: @x @y;
+  -msie-border-bottom-left-radius: @x @y;
+  -o-border-bottom-left-radius: @x @y;
+  border-bottom-left-radius: @x @y;
+}
+
+.radius-bottom-right(@x: 30px, @y: 50px){
+  -webkit-border-bottom-right-radius: @x @y;
+  -moz-border-bottom-right-radius: @x @y;
+  -msie-border-bottom-right-radius: @x @y;
+  -o-border-bottom-right-radius: @x @y;
+  border-bottom-right-radius: @x @y;
+}
+
+.rotate(@deg: 315deg){
+  -webkit-transform: rotate(@deg);
+  -moz-transform: rotate(@deg);
+  -o-transform: rotate(@deg);
+  -msie-transform: rotate(@deg);
+  transform: rotate(@deg);          
+}
+
+.skew(@x: 45deg, @y: 45deg){
+  -webkit-transform: skew(@x, @y);
+  -moz-transform: skew(@x, @y);
+  -o-transform: skew(@x, @y);
+  -msie-transform: skew(@x, @y);
+  transform: skew(@x, @y);
+}
+
+.transform-origin(@x: 43px, @y: 43px){
+  -webkit-transform-origin:@x @y;
+  -moz-transform-origin:@x @y;
+  -o-transform-origin:@x @y;
+  -msie-transform-origin:@x @y;
+  transform-origin:@x @y;
+}
+
+
+/* spec style */
+.traffic-light{
+  width: 240px;
+  height: 360px;
+  .absolute-center();
+  .light-outer{
+    position: relative;
+    width: 130px;
+    height: 94px;
+    .radius();
+    background-color: @grey-light;
+    .light-inner{
+      width: 86px;
+      height: 86px;
+      padding: 4px;
+      margin: 0px auto;
+      background-color: @grey-heavy;
+      .radius();
+      .light{
+        width: 86px;
+        height: 86px;
+        .radius(50%);
+        &::before{
+          content: '';
+          display: block;
+          width: 86px;
+          height: 43px; 
+          .radius(43px 43px 0 0);
+          .rotate(315deg);
+          .transform-origin(43px 43px)
+        }
+      }
+      .light.red{
+        background-color: #de4639;
+        &::before{
+          background-color: #e84c3d;
+        }
+      }
+      .light.yellow{
+        background-color: #eab71e;
+        &::before{
+          background-color: #f0c514;
+        }
+      }
+      .light.green{
+        background-color: #2bae6c;
+        &::before{
+          background-color: #2db573;
+        }
+      }
+    }
+    .light-left-top-shade{
+      position: absolute;
+      top: 8px;
+      left: -50px;
+      width: 50px;
+      height: 50px;
+      background-color: @grey-light;  
+      .radius-bottom-left(30px, 50px);
+    }
+    .light-left-bottom-shade{
+      position: absolute;
+      top: 48px;
+      left: -50px;
+      width: 50px;
+      height: 40px;
+      background-color: @grey-heavy; 
+      &::after{
+        content: '';
+        display: block;
+        position: absolute;
+        top: -5px;
+        left: 0;
+        width: 26px;
+        height: 50px;  
+        background-color: @bgcolor;
+        .radius-top-right(30px, 50px);
+      }
+    }
+    .light-right-top-shade{
+      position: absolute;
+      top: 8px;
+      right: -50px;
+      width: 50px;
+      height: 50px;
+      background-color: @grey-light;   
+      .radius-bottom-right(30px, 50px);
+    }
+    .light-right-bottom-shade{
+      position: absolute;
+      top: 48px;
+      right: -50px;
+      width: 50px;
+      height: 40px;
+      background-color: @grey-heavy; 
+      &::after{
+        content: '';
+        display: block;
+        position: absolute;
+        top: -5px;
+        right: 0;
+        width: 26px;
+        height: 50px;  
+        background-color: @bgcolor-shadow;
+        .radius-top-left(30px, 50px);
+      }
+    }
+    margin-bottom: 8px;
+    &::after{
+      content: '';
+      display: block;
+      margin: 0 auto;
+      width: 100%-12px;
+      height: 8px; 
+      background-color: @grey-light;
+    }
+    &:nth-of-type(3){
+      &::after{
+        height: 12px; 
+        .radius(0 0 12px 12px);
+      }
+    }
+    .first-light-decorate{
+      position: absolute;
+      margin: 0 auto;
+      left: 0;
+      right: 0;
+      top: -12px;
+      display: block;    
+      width: 100%-12px;
+      height: 12px;   
+      background-color: @grey-light;
+      .radius(12px 12px 0 0);
+      &::before{
+        position: absolute;
+        margin: 0 auto;
+        content: '';
+        left: 0;
+        right: 0;
+        top: -8px;
+        display: block;    
+        width: 100%-16px;
+        height: 8px;   
+        background-color: @grey-light;
+        .radius(8px 8px 0 0);
+      }
+      &::after{
+        position: absolute;
+        margin: 0 auto;
+        content: '';
+        left: 0;
+        right: 0;
+        top: -16px; 
+        display: block;    
+        width: 100%-30px;
+        height: 8px;   
+        background-color: @grey-light;
+        .radius(4px 4px 0 0);
+      }
+    }
+  }
+  
+  /* traffic light shadow */
+  .traffic-light-shadow1{
+    position: absolute;
+    z-index: -1;
+    top: 8px;
+    left: 148px;
+    width: 230px;
+    height: 400px;
+    background-color: @bgcolor-shadow;
+    .skew(45deg, 0);
+  }
+  .traffic-light-shadow2{
+    position: absolute;
+    z-index: -1;
+    top: 60px;
+    left: 121px; 
+    width: 230px;
+    height: 348px;
+    background-color: #29a368;
+    .skew(45deg, 0);
+  }
+  .traffic-light-shadow3{
+    position: absolute;
+    z-index: -1;
+    top: 190px;
+    left: 85px;
+    width: 230px;
+    height: 218px; 
+    background-color: @bgcolor-shadow;
+    .skew(45deg, 0);
+  }
+  .traffic-light-shadow4{
+    position: absolute;
+    z-index: -1;
+    top: 264px;
+    left: 20px; 
+    width: 230px;
+    height: 144px;
+    background-color: @bgcolor-shadow;
+    .skew(45deg, 0);
+  }
+}
+
