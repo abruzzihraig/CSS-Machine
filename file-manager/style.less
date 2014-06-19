@@ -1,0 +1,158 @@
+body{
+  background-color: rgb(83, 89, 127);
+}
+
+/* mixin common style */
+.background-linear(@position: top, @color-linear1, @color-linear2, @color-linear3){
+  background-image: -webkit-linear-gradient(@position, @color-linear1, @color-linear2, @color-linear3);
+  background-image: -moz-linear-gradient(@position, @color-linear1, @color-linear2, @color-linear3);
+  background-image: -ms-linear-gradient(@position, @color-linear1, @color-linear2, @color-linear3);
+  background-image: -o-linear-gradient(@position, @color-linear1, @color-linear2, @color-linear3);
+  background-image: linear-gradient(@position, @color-linear1, @color-linear2, @color-linear3);
+}
+
+.box-shadow(@h-shadow: 0px, @v-shadow: 5px, @blur: 15px, @spread: 1px, @color: #333){ 
+  -webkit-box-shadow: @h-shadow @v-shadow @blur @spread @color;
+  -moz-box-shadow: @h-shadow @v-shadow @blur @spread @color;
+  -ms-box-shadow: @h-shadow @v-shadow @blur @spread @color;
+  -o-box-shadow: @h-shadow @v-shadow @blur @spread @color;
+  box-shadow: @h-shadow @v-shadow @blur @spread @color;
+}
+
+.box-inner-shadow(@inset: inset, @h-shadow: 0px, @v-shadow: 5px, @blur: 15px, @spread: 1px, @color: #8b5d30){ 
+  -webkit-box-shadow: @inset @h-shadow @v-shadow @blur @spread @color;
+  -moz-box-shadow: @inset @h-shadow @v-shadow @blur @spread @color;
+  -ms-box-shadow: @inset @h-shadow @v-shadow @blur @spread @color;
+  -o-box-shadow: @inset @h-shadow @v-shadow @blur @spread @color;
+  box-shadow: @inset @h-shadow @v-shadow @blur @spread @color;
+}
+
+.absolute-center{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+/* spec style */
+.file-manager{
+  width: 350px;
+  height: 300px;
+  overflow: hidden;
+  .box-shadow();
+  .absolute-center;
+  .background-linear(top, rgb(197, 159, 110), rgb(187, 144, 96), rgb(177, 129, 83));
+  &::before{
+    content: '';
+    position: absolute;
+    z-index: 0;
+    top: 100px;
+    left: -15px;
+    width: 0px;
+    height: 0px;
+    border-left: 190px solid transparent;
+    border-right: 190px solid transparent;
+    border-top: 60px solid rgb(184, 138, 91);
+  } 
+  &::after{
+    content: '';
+    position: absolute;
+    z-index: 1;
+    top: 95px;
+    left: -15px;
+    width: 0;
+    height: 0px;
+    border-left: 190px solid transparent;
+    border-right: 190px solid transparent;
+    border-top: 60px solid rgb(191, 150, 101);
+  }
+}
+
+
+.circle-top-outer{
+  position: absolute;
+  z-index: 20;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 40px;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background-color: rgb(255, 255, 254);
+  .box-shadow(0, 0, 15px, 0px, #845628);
+}
+
+.circle-top-inner{
+  z-index: 30;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  .box-inner-shadow(@color: #a87e4c);
+  .absolute-center;
+  .background-linear(top, rgb(160, 118, 68), rgb(183, 142, 93), rgb(189, 147, 100));
+}
+
+.circle-bottom-outer{
+  position: absolute;
+  z-index: 20;
+  margin: auto;
+  left: 0;
+  right: 0;
+  bottom: 40px;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background-color: rgb(255, 255, 254);
+  .box-shadow(0, 10px, 10px, 1px, #845628);
+}
+
+.circle-bottom-inner{
+  z-index: 30;
+  margin: auto;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; 
+  .box-inner-shadow(@color: #8b5d30);
+  .absolute-center;
+  .background-linear(top, rgb(126, 80, 34), rgb(174, 128, 83), rgb(179, 132, 87)); 
+}
+
+.line-left{
+  position: absolute;
+  z-index: 10;
+  top: 100px;
+  left: 135px;
+  width: 20px;
+  height: 120px;
+  background-color: rgb(255, 255, 255);
+  .box-shadow(0, 10px, 10px, 1px, #845628);
+}
+
+.line-right{
+  position: absolute;
+  z-index: 10;
+  top: 100px;
+  right: 135px;
+  width: 20px;
+  height: 120px;
+  background-color: rgb(255, 255, 255);
+  .box-shadow(0, 10px, 10px, 1px, #845628);
+}
+
+.circle-shadow{
+  position: absolute;
+  z-index: 15;
+  width: 0px;
+  height: 0px;
+  border-left: solid 45px transparent;
+  border-right: solid 45px transparent;
+  border-top: solid 160px #b88a5b;
+  opacity: 0.6;
+  top: 90px;
+  margin: auto;
+  left: 0px;
+  right: 0px;
+}
